@@ -1,5 +1,14 @@
+import { PrismaClient } from "@prisma/client"
+import { PrismaPg } from "@prisma/adapter-pg"
+import { Pool } from "pg"
 import bcrypt from "bcryptjs"
-import { prisma } from "../src/lib/prisma"
+
+// Create a local Prisma client for the seed script using the same
+// adapter approach as the application runtime. This avoids importing
+// from `src/` which may not be present in the production runner image.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+const adapter = new PrismaPg(pool)
+const prisma = new PrismaClient({ adapter })
 
 async function main() {
   console.log("🌱 Seeding database...")
