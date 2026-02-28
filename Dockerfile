@@ -70,6 +70,7 @@ COPY --from=deps /app/node_modules/pg-connection-string ./node_modules/pg-connec
 # ── Prisma CLI (for migrate deploy at start) ───────────
 COPY --from=deps /app/node_modules/prisma              ./node_modules/prisma
 COPY --from=deps /app/node_modules/@prisma/engines      ./node_modules/@prisma/engines
+COPY --from=deps /app/node_modules/valibot             ./node_modules/valibot
 
 # ── Schema + config (needed by CLI) ───────────────────
 COPY --from=builder /app/prisma        ./prisma
