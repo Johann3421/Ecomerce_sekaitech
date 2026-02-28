@@ -1,0 +1,47 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Next.js build output
+.next
+out
+
+# Environment files (never include in image)
+.env
+.env.local
+.env.development
+.env.production
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Dev tools
+.eslintcache
+.vscode
+.idea
+*.swp
+*.swo
+
+# Tests
+coverage
+__tests__
+*.test.ts
+*.spec.ts
+
+# Docs
+README.md
+*.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Prisma dev artifacts
+prisma/*.db
+prisma/*.db-journal
