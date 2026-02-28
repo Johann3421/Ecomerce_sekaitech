@@ -72,6 +72,9 @@ COPY --from=deps /app/node_modules/prisma              ./node_modules/prisma
 COPY --from=deps /app/node_modules/@prisma/engines      ./node_modules/@prisma/engines
 COPY --from=deps /app/node_modules/valibot             ./node_modules/valibot
 
+# Copy all node_modules from deps to ensure runtime deps (Prisma CLI needs several)
+COPY --from=deps /app/node_modules ./node_modules
+
 # ── Schema + config (needed by CLI) ───────────────────
 COPY --from=builder /app/prisma        ./prisma
 COPY --from=builder /app/prisma.config.ts ./
