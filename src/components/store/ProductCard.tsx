@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -6,6 +6,7 @@ import { ShoppingBag, Star } from "lucide-react"
 import { useCartStore } from "@/store/cart"
 import { formatPrice, calculateDiscount } from "@/lib/utils"
 import Badge from "@/components/ui/Badge"
+import { useState } from "react"
 
 interface ProductCardProps {
   product: {
@@ -42,6 +43,9 @@ export default function ProductCard({ product }: ProductCardProps) {
     })
   }
 
+  const initialImage = product.images[0]?.url || "/images/placeholder.svg"
+  const [imgSrc, setImgSrc] = useState(initialImage)
+
   return (
     <Link
       href={`/products/${product.slug}`}
@@ -49,15 +53,14 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       {/* Image */}
       <div className="relative aspect-[4/5] overflow-hidden bg-surface-100">
-        {product.images[0] && (
-          <Image
-            src={product.images[0].url}
-            alt={product.images[0].alt || product.name}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          />
-        )}
+        <Image
+          src={imgSrc}
+          alt={product.images[0]?.alt || product.name}
+          fill
+          onError={() => setImgSrc("/images/placeholder.svg")}
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        />
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
