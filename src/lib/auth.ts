@@ -6,6 +6,9 @@ import bcrypt from "bcryptjs"
 import { prisma } from "./prisma"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  // When running behind a reverse proxy (Traefik) the Host header
+  // should be trusted so Auth.js can validate callback URLs.
+  trustHost: true,
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   pages: {
